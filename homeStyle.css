@@ -1,0 +1,52 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #e6e6e6;
+  margin-top: 50px;
+  text-align: center;
+  background-image: url("immagini/sfondoOP.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+i{
+  color: rgb(143, 0, 0);
+}
+
+#myDiv {
+  display: none;
+  height: fit-content;
+  font-size: 20px;
+  font-weight: bolder;
+  word-wrap: break-word;
+  text-align: justify;
+  text-justify: auto;
+}
+
+#H{
+  display: none;
+  margin-top: 5%;
+}
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+  #H{
+    display: none;
+    margin-top: 20%;
+  }
+}
+
+.col-sm-8{
+  position: inherit;
+  background-color: #e6e6e6;;
+  }
+  
