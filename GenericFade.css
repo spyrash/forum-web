@@ -1,0 +1,19 @@
+html,
+body {
+  height: 100%;
+}
+#div1{
+    display: none;
+  }
+#div2{
+    display: none;
+  }
+#divT{
+    display: none;
+    }
+#divS{
+    display: none;
+  }
+#divD{
+    display: none;
+  }

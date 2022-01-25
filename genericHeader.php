@@ -22,7 +22,7 @@
             <?php
             session_start();//QUESTO CREA O RIPRENDE SE GIA CREATA UNA SESSIONE E CON SE PRENDE I METODI GET E POST CHE USEREMO
             if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
-                echo '<a href="signout.php">LOG OUT</a><div id="logDiv">Benvenuto ' . $_SESSION['user_name'] . '. Non sei tu?</div>';
+             echo '<a href="signout.php">LOG OUT</a><div id="logDiv">Benvenuto ' . $_SESSION['user_name'] . '. Non sei tu?</div>';
             }
             else {
 

@@ -9,15 +9,17 @@ if(!isset($_GET['id']) or $_GET['id'] != 2 or !is_numeric($_GET['id'])){
     header("Location: C++.php?id=2");
 }
 ?>
+   <link rel="stylesheet" type="text/css" href="GenericFade.css">
    <script type="text/javascript" lang="javascript" src="animScript.js"></script>
+   <script type="text/javascript" lang="javascript" src="fade.js"></script>
    <script type="text/javascript" lang="javascript" src="postControl.js"></script>
  <div class="align-text-top" >
 
-<h1 class="text-uppercase text-success">Linguaggio C++ <hr></h1> 
+<h1 id="divT" class="text-uppercase text-success">Linguaggio C++ <hr></h1> 
 </div>
 <div class="row no-gutters">
   
-   <div class="col no-gutters">
+  <div id="divS" class="col no-gutters"> <!-- parte sinistra -->
       <div>
    
 
@@ -45,7 +47,7 @@ Non c'è un proprietario del linguaggio C++, che è implementabile senza dover p
        </div>
       </div>
    </div>   
-   <div class="col no-gutters">
+   <div  id="divD" class="col no-gutters"> <!-- PARTE DESTRA -->
    <div>
       <div>
       <img class="langImg" src="immagini/c-plus-logo.png">

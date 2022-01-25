@@ -9,15 +9,17 @@ if(!isset($_GET['id']) or $_GET['id'] != 6 or !is_numeric($_GET['id'])){
     header("Location: Scala.php?id=6");
 }
 ?>
+   <link rel="stylesheet" type="text/css" href="GenericFade.css">
+   <script type="text/javascript" lang="javascript" src="fade.js"></script>
    <script type="text/javascript" lang="javascript" src="animScript.js"></script>
    <script type="text/javascript" lang="javascript" src="postControl.js"></script>
  <div class="align-text-top" >
 
-<h1 class="text-uppercase text-success">Linguaggio Scala <hr></h1> 
+<h1 id="divT" class="text-uppercase text-success">Linguaggio Scala <hr></h1> 
 </div>
 <div class="row no-gutters">
   
-   <div class="col no-gutters">
+   <div id="divS" class="col no-gutters">
       <div>
    
 
@@ -35,7 +37,7 @@ if(!isset($_GET['id']) or $_GET['id'] != 6 or !is_numeric($_GET['id'])){
        </div>
       </div>
    </div>   
-   <div class="col no-gutters">
+   <div id="divD" class="col no-gutters">
    <div>
       <div>
       <img class="langImg" src="immagini/scala.png">

@@ -9,13 +9,15 @@ if(!isset($_GET['id']) or $_GET['id'] != 1 or !is_numeric($_GET['id'])){ //CONTR
     header("Location: C.php?id=1"); //SE NON LO è PER UN MOTIVO O UN ALTRO LO RICONDUCO ALLA PAGINA GIUSTA
 }
 ?>
+   <link rel="stylesheet" type="text/css" href="GenericFade.css">
    <script type="text/javascript" lang="javascript" src="animScript.js"></script>
+   <script type="text/javascript" lang="javascript" src="fade.js"></script>  
    <script type="text/javascript" lang="javascript" src="postControl.js"></script>
  <div class="align-text-top"> 
- <h1 class="text-uppercase text-success">Linguaggio C<hr></h1> 
+ <h1 id="divT" class="text-uppercase text-success">Linguaggio C<hr></h1> 
 </div>
 <div class="row no-gutters">
-    <div class="col no-gutters">
+    <div id="divS" class="col no-gutters">
       <div>
        <div class="testo text-xl-left"> <!-- PARTE SINISTRA -->
          <h1 class="text-uppercase">C</h1> <hr>
@@ -41,7 +43,7 @@ if(!isset($_GET['id']) or $_GET['id'] != 1 or !is_numeric($_GET['id'])){ //CONTR
        </div>
       </div>
    </div>   
-   <div class="col no-gutters"> <!-- PARTE DESTRA -->
+   <div id="divD" class="col no-gutters"> <!-- PARTE DESTRA -->
    <div>
       <div>
       <img class="langImg" src="immagini/programmare-in-linguaggio-c.png">
