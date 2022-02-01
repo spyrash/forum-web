@@ -38,6 +38,7 @@ if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) //COME AL SO
                 else
                 {                  
                 echo '<div class="jumbotron">
+                
                 <form method="post" class="form-signin" action="" name="langPostForm" onSubmit="return validatePost();">
                 TITOLO :   <input type="text"  name="topic_subject" class="form-control" autofocus/> </br>
                 LINGUAGGIO:';  

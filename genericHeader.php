@@ -17,7 +17,7 @@
                     <a href="JavaScript.php?id=5">JAVASCRIPT</a>
                     <a href="Python.php?id=3">PYTHON</a>
                     <a href="Scala.php?id=6">SCALA</a>
-                    <a href="Q&A.php">Q&A</a>
+                    <a href="Q&A.php?id=0">Q&A</a>
  
             <?php
             session_start();//QUESTO CREA O RIPRENDE SE GIA CREATA UNA SESSIONE E CON SE PRENDE I METODI GET E POST CHE USEREMO

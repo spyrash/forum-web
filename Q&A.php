@@ -6,15 +6,26 @@
 include 'connect.php';
 include 'genericHeader.php';
 ?>
-
 <link rel="stylesheet" type="text/css" href="GenericFade.css">
   <script type="text/javascript" lang="javascript" src="signinScript.js"></script>
   <script type="text/javascript" lang="javascript" src="ColoraTabella.js"></script>
   <script type="text/javascript" lang="javascript" src="tabellaselect.js"></script>
   <script type="text/javascript" lang="javascript" src="fade.js"></script>
 <?php
-$num_elem_pagine=4; //limito per le pagine
+$num_elem_pagine=5; //limito per le pagine
 //FACCIO SUBITO UNA QUERY IN CUI JOINO TOPICS,USERS E LANGUAGES CORRELATI TRA LORO
+$id=$_GET['id']; //PRENDO L'ID DELLA PAGINA
+$controllo=$_GET['id']; //controllo per i next o i previous di dopo
+if(!isset($_GET['id'])){
+  header("Location: Q&A.php?id=0");
+}
+if($id<0){
+  header("Location: Q&A.php?id=2");
+}
+if($id>2){
+  header("Location: Q&A.php?id=0");   //METTO UN CICLO TRA LE PAGINE
+}
+if($id!=2){
 $query = "SELECT
   users.user_name,
    topics.topic_id,
@@ -35,7 +46,34 @@ $query = "SELECT
    topics.topic_by=users.user_id
    WHERE
    topics.topic_lang=languages.lang_id AND topics.topic_by=users.user_id
-   ORDER BY topics.topic_date DESC LIMIT $num_elem_pagine "; 
+   ORDER BY topics.topic_date DESC
+   LIMIT $num_elem_pagine*($id+1) 
+   OFFSET $num_elem_pagine*$id ";  //CON OFFSET RIESCO A PARTIRE DA UN TOT
+}
+else{
+  $query = "SELECT
+  users.user_name,
+   topics.topic_id,
+   topics.topic_subject,
+   topics.topic_date,
+   topics.topic_lang,
+   topics.topic_by,
+   languages.lang_name
+  FROM
+   topics
+    JOIN 
+   languages
+   on
+   topics.topic_lang=languages.lang_id 
+    JOIN
+   users
+   on
+   topics.topic_by=users.user_id
+   WHERE
+   topics.topic_lang=languages.lang_id AND topics.topic_by=users.user_id
+   ORDER BY topics.topic_date DESC
+   OFFSET $num_elem_pagine*$id ";  //CON OFFSET RIESCO A PARTIRE DA UN TOT
+}
 $result = pg_query($query);
 if(!$result)
 {
@@ -89,10 +127,10 @@ else
                         echo '<td >';
                             echo '<h4><a class="myAnchor" href="topic.php?id=' . $row['topic_id'] . '">' .htmlspecialchars ($row['topic_subject']) . '</a><h4>';//METTO IL TITOLO DEL TOPIC COME LINK AL SUO ID IL LINK PORTA A TOPIC.PHP SE VEDI
                         echo '</td>';
-                        echo '<td>';
-                        echo date('(d-m-Y) ', strtotime($row['topic_date'])); echo'</br>';// QUA METTO DATA E SOTTO ORA 
-                        echo date('(H:i:s) ', strtotime($row['topic_date']));
-                          echo '</td>';
+                        echo '<td><h5>Pubblicato Il:</br>';
+                        echo date('d-m-Y ', strtotime($row['topic_date'])); echo'</br> Alle:';// QUA METTO DATA E SOTTO ORA 
+                        echo date(' H:i ', strtotime($row['topic_date']));
+                          echo '</h5></td>';
                           echo'<td>
                           <h4>'. $row['user_name'] .' </h4> 
                           </td>';//E ALLA FINE METTO L'USER_NAME DI CHI HA FATTO LA DOMANDA
@@ -104,31 +142,50 @@ else
               
             }
             
-              echo'<nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#" onClick="'. $num_elem_pagine=10 .'">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+              echo'<nav  aria-label="Page navigation example">
+              <ul  class="pagination justify-content-center">
                 <li class="page-item">
-                  <a class="page-link" href="#" onclick=" ' . $num_elem_pagine=10 .'">Next</a>
+                  <a class="page-link" href="Q&A.php?id='.--$id.'">Previous</a>
                 </li>
+                <li class="page-item" ><a class="page-link" href="Q&A.php?id=0">1</a></li>
+                <li class="page-item"><a class="page-link" href="Q&A.php?id=1">2</a></li>
+                <li class="page-item"><a class="page-link" href="Q&A.php?id=2">3</a></li>
+                ';
+                if($controllo==2){ //DISABILITO NEXT SE ARRIVO ALLA FINE
+                  echo'
+                  <li class="page-item disabled">
+                  <a class="page-link" href="Q&A.php?id='.++$_GET['id'] .'">Next</a>';
+                }
+                else{ //altrimenti no
+                 echo ' 
+                 <li class="page-item">
+                 <a class="page-link" href="Q&A.php?id='.++$_GET['id'] .'">Next</a>';
+                }
+               echo' </li>
               </ul>
             </nav>';
  
                 echo '</tbody></table></div>';
                 echo'<nav aria-label="Page navigation example">
               <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1">Previous</a>
+              <li class="page-item">
+              <a class="page-link" href="Q&A.php?id='.$id.'">Previous</a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" onclick=" ' . $num_elem_pagine=10 .'">Next</a>
+                <li class="page-item"><a class="page-link" href="Q&A.php?id=0">1</a></li>
+                <li class="page-item" ><a class="page-link" href="Q&A.php?id=1">2</a></li>
+                <li class="page-item"><a class="page-link" href="Q&A.php?id=2">3</a></li>
+                ';
+                if($controllo==2){ //DISABILITO NEXT SE ARRIVO ALLA FINE
+                  echo'
+                  <li class="page-item disabled"> 
+                  <a class="page-link" href="Q&A.php?id='.++$_GET['id'] .'">Next</a>';
+                }
+                else{  //altrimenti no
+                 echo ' 
+                 <li class="page-item">
+                 <a class="page-link" href="Q&A.php?id='.++$_GET['id'] .'">Next</a>';
+                }
+               echo'
                 </li>
               </ul>
             </nav>';// CHIUDO IL DIV DELLA TABELLA E MESSO IL PROVA FAIN UNA DOMADA, ABBELLIBILE INOLTRE NON SO PERCHè LO METTE SOPRA LA TABELLA :DD
